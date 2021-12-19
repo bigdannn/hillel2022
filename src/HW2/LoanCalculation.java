@@ -19,11 +19,18 @@ public class LoanCalculation {
 
         double iRate2 = (1+interestRate/100);
 
+        double accumulation;
+        double additionalVariable;
+        for (int i = 1; i <= durationOfDeposit; i++) {
+            accumulation = amountOfCash*Math.pow(iRate2, i);
+            System.out.println("After the " + i + " year you will got " + accumulation);
+            additionalVariable=accumulation;
+            System.out.println("For the " + i +" year you will earn " + (accumulation-amountOfCash) + " ₴ ");
+            System.out.println("----------------------------");
+        }
+
         double profit = amountOfCash*Math.pow(iRate2, durationOfDeposit);
-
-        System.out.println(profit);
-
-
-
+        System.out.println("Your profit for " + durationOfDeposit + " years will be " + profit + " ₴ ");
+        System.out.println("For this period you have accumulated " + (profit-amountOfCash) + " ₴");
     }
 }
