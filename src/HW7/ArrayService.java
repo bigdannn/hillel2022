@@ -4,19 +4,17 @@ import java.util.Arrays;
 
 public class ArrayService {
 
+    int counter = 0;
+
     public String[] array = new String[10];
 
     //добавляем значение последнему пустому элементу массива.
     public boolean add(String value) {
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] == null) {
-                array[i] = value;
-                break;
-            }
-        }
+        array[counter] = value;
         if (array[array.length - 2] != null) {
             array = incrSize(array);
         }
+        counter++;
         return true;
     }
 
@@ -24,17 +22,17 @@ public class ArrayService {
     public boolean add(int index, String value) {
         if (index > array.length - 1) {
             array = incrSize(array);
-            array[index] = value;
+            array[counter] = value;
+            counter++;
             return true;
         } else if (index >= 0 && index < array.length - 1) {
-            for (int i = array.length - 1; i > index; i--) {
-                if (array[i] != null) {
-                    array[i + 1] = array[i];
-                }
+            for (int i = counter; i > index; i--) {
+                array[i + 1] = array[i];
             }
-            String temporary = array[index];
+            String temp = array[index];
             array[index] = value;
-            array[index + 1] = temporary;
+            array[index + 1] = temp;
+            counter++;
             return true;
         } else {
             return false;
@@ -42,7 +40,7 @@ public class ArrayService {
     }
 
     //увеличиваем размер массива.
-    public String[] incrSize(String[] array) {
+    private String[] incrSize(String[] array) {
         String[] newArr = new String[array.length * 2];
         newArr = Arrays.copyOf(array, array.length * 2);
         return newArr;
@@ -51,24 +49,21 @@ public class ArrayService {
     //удаляем значение по индексу.
     public boolean delete(int index) {
         array[index] = null;
-        for (int i = index; i < array.length-2; i++) {
-            array[i] = array[i+1];
+        for (int i = index; i < counter; i++) {
+            array[i] = array[i + 1];
         }
+        counter--;
         return true;
     }
 
     //Меняем значение подследнего записанного объекта.
-    public boolean delete(String value){
-        for (int i = array.length-1; i >=0 ; i--) {
-            if (array[i] != null){
-                array[i] = value;
-                break;
-            }
-        }
+    public boolean delete(String value) {
+        array[counter-1] = value;
+
         return true;
     }
 
-    public String get(int index){
+    public String get(int index) {
         String value = array[index];
         return value;
     }
