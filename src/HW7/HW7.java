@@ -18,12 +18,12 @@ public class HW7 extends ArrayService{
         test.add("7v");
         test.add("8v");
         System.out.println(Arrays.toString(test.array) + " " + test.counter);
-        test.delete("100v");
-        System.out.println(Arrays.toString(test.array) + " " + test.counter);
         test.add("tutu");
         System.out.println(Arrays.toString(test.array) + " " + test.counter);
-        test.delete("popo");
+        test.delete("4v");
         System.out.println(Arrays.toString(test.array) + " " + test.counter);
+        System.out.println(test.get(13));
+
 
     }
 }

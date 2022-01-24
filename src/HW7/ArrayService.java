@@ -58,14 +58,25 @@ public class ArrayService {
 
     //Меняем значение подследнего записанного объекта.
     public boolean delete(String value) {
-        array[counter-1] = value;
-
+        for (int i = 0; i < counter; i++) {
+            if(value.equals(array[i])){
+                for (int j = i; j < counter; j++) {
+                    array[j] = array[j+1];
+                }
+            }
+        }
         return true;
     }
 
     public String get(int index) {
-        String value = array[index];
-        return value;
+        if(index < 0){
+           return "Извините, индекс не может быть отрицательным.";
+        } else if(index > 0 && index < counter) {
+            String value = array[index];
+            return value;
+        } else {
+            return "Извините, в этой ячейке пока ничего нет.";
+        }
     }
 
 }
