@@ -10,9 +10,9 @@ public class Realisation {
         Person person1 = new Person("Petr", 21);
         Person person3 = new Person("Petr", 21);
         test.add(person);
-        System.out.println(Arrays.toString(test.array));
+        test.printArray();
         test.add(0,person1);
-        System.out.println(Arrays.toString(test.array));
+        test.printArray();
         test.contain(person1);
 
 

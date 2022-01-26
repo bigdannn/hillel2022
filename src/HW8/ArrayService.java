@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class ArrayService implements Managable {
 
 
-    public Object[] array = new Object[10];
-    int counter = 0;
+    private Object[] array = new Object[10];
+    private int counter = 0;
 
     @Override
     public boolean add(Object o) {
@@ -43,7 +43,7 @@ public class ArrayService implements Managable {
     public boolean delete(Object o) {
         for (int i = 0; i < counter; i++) {
             if(o.equals(array[i])){
-                for (int j = i; j < counter; j++) {
+                for (int j = counter; j >= i; j--) {
                     array[j] = array[j+1];
                 }
             }
@@ -57,8 +57,7 @@ public class ArrayService implements Managable {
         if(index < 0){
             return "Индекс не может быть отрицательным.";
         } else if(index > 0 && index < counter) {
-            Object value = array[index];
-            return value;
+            return array[index];
         } else {
             return "В этой ячейке пока ничего нет.";
         }
@@ -72,6 +71,7 @@ public class ArrayService implements Managable {
                 return true;
             } else{
                 System.out.println("Извините, в коллекции нет такого объекта.");
+                return false;
             }
         }
         return true;
@@ -102,5 +102,8 @@ public class ArrayService implements Managable {
         Object[] newArr = new Object[array.length * 2];
         newArr = Arrays.copyOf(array, array.length * 2);
         return newArr;
+    }
+    public void printArray(){
+        System.out.println(Arrays.toString(array));
     }
 }
