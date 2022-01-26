@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class ArrayService implements Managable {
 
+    //переменные класса переделал на  private
 
     private Object[] array = new Object[10];
     private int counter = 0;
@@ -40,12 +41,14 @@ public class ArrayService implements Managable {
     }
 
     @Override
-    public boolean delete(Object o) {
+    public boolean delete(Object object) {
         for (int i = 0; i < counter; i++) {
-            if(o.equals(array[i])){
-                for (int j = counter; j >= i; j--) {
+            //Теперь последний элемент перезаписываеться.
+            if(object.equals(array[i])){
+                for (int j = i; j < counter; j++) {
                     array[j] = array[j+1];
                 }
+                break;
             }
         }
         counter--;
@@ -70,6 +73,7 @@ public class ArrayService implements Managable {
                 System.out.println("Коллекция содержит данный объект. Он находится под номером " + counter + "(учти, что отсчет индекса с 0). ");
                 return true;
             } else{
+                //Если нет такого элемента, выводит:
                 System.out.println("Извините, в коллекции нет такого объекта.");
                 return false;
             }
