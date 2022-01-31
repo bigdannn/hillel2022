@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class MyLinkList<T> {
+public class MyLinkList<T>{
 
     private class Node<T> {
         T value;
