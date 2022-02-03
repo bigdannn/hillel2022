@@ -1,6 +1,7 @@
 package HW8;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class Realisation {
     public static void main(String[] args) {
@@ -13,16 +14,12 @@ public class Realisation {
         test.add(person);
         test.printArray();
         test.add(0,person1);
-        test.printArray();
-        test.contain(person1);
-        test.contain(person4);
         test.add(person4);
         test.add(person3);
-        test.printArray();
         test.delete(person1);
         test.printArray();
 
-
-
     }
+
+
 }

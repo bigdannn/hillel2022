@@ -2,11 +2,12 @@ package HW8;
 
 import java.util.Arrays;
 
-public class ArrayService implements Managable {
+public class ArrayService implements Managable, Iterator{
 
     //переменные класса переделал на  private
 
     private Object[] array = new Object[10];
+    private int currentPosition = 0;
     private int counter = 0;
 
     @Override
@@ -109,5 +110,34 @@ public class ArrayService implements Managable {
     }
     public void printArray(){
         System.out.println(Arrays.toString(array));
+    }
+
+    @Override
+    public boolean hasNext() {
+        size();
+        return currentPosition < array.length;
+    }
+
+    public Object[] getArray() {
+        return array;
+    }
+
+    public void setArray(Object[] array) {
+        this.array = array;
+    }
+
+    public Object getNext() {
+        if (!hasNext()) {
+            return null;
+        }
+        Object obj = array[currentPosition];
+        if (obj == null){
+            setArray(array);
+        }
+        currentPosition++;
+        return obj;
+    }
+    public void reset(){
+        counter = 0;
     }
 }
