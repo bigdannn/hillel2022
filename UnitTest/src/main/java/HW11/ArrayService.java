@@ -1,3 +1,5 @@
+package HW11;
+
 import java.util.Arrays;
 
 public class ArrayService implements Managable, Iterator{

@@ -1,3 +1,5 @@
+package HW11;
+
 public class Person {
 
     private String name;
