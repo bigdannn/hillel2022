@@ -1,6 +1,14 @@
 package HW13;
 
+import java.util.Scanner;
+
 public class Capcha {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Capcha.psevdoCode("476849568");
+    }
 
     public static void psevdoCode(String str){
         int numbers = Integer.parseInt(str);
