@@ -1,0 +1,41 @@
+
+
+Написать приложение которое производит конвертаций форматов Json <--> Yaml:
+
+1. на вход приложения в виде аргумента программы принимаем расположение директории
+где находятся файлы, если аргумент отсутствует то происходит анализ текущей папки
+2. валидируем формат (YAML, JSON)
+3. сохраняем полученный файл в папке converted (старое имя + новое расширение)
+4. результаты конвертации сохраняем в файле result.log в формате
+имя_файла -> новое_имя_файла, длительность конвертации, старый размер -> новый размер
+5. если конвертация не возможна надо записать что файл не сконвертировался
+
+
+1. определяем какие файлы есть в директории
+            List<String> getFilePath(Path path)
+
+2. Валидация
+            List<String> getFileValidPath(List<String> filesPath)
+
+3. Конвертация
+            void fileConvert(Path path)
+
+4. Cохранение сконвертировано файла
+            void saveResult(Sting content)
+
+5. Логирование работы программы
+
+
+public static String asYaml(String jsonString) throws JsonProcessingException, IOException {
+        JsonNode jsonNodeTree = new ObjectMapper().readTree(jsonString);
+        return new YAMLMapper().writeValueAsString(jsonNodeTree);
+    }
+
+    public static void Saver(String str, String path) throws IOException {
+        OutputStream output = new FileOutputStream(path, true);
+        if (!(Files.exists(Path.of(path)))) {
+            Path file  = Files.createFile(Path.of(path));
+        } else {
+            output.write(str.getBytes(StandardCharsets.UTF_8));
+        }
+    }

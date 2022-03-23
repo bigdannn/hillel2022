@@ -63,7 +63,6 @@ public class StoneScissorsPaper {
 
         System.out.println("Where do you want to save your results? Paste the path, please.");
 
-
         String path = sc.nextLine() + "results.txt";
 
         while(!(checkIn(path))){
