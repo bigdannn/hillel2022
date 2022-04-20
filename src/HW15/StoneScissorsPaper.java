@@ -7,23 +7,30 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class StoneScissorsPaper {
+
+
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Please enter your Name.");
+        Locale loc = new Locale("de");
+
+        Locale.setDefault(Locale.ENGLISH);
+
+        ResourceBundle bundle = ResourceBundle.getBundle("Localization",loc);
+
+        System.out.println(bundle.getString("name"));
         Player player = new Player(sc.nextLine());
         Computer computer = new Computer();
 
-        System.out.println("How much games do you want to play?");
+        System.out.println(bundle.getString("games"));
         String numberOfGames = sc.nextLine();
 
         boolean gameOrNo = check(Double.parseDouble(numberOfGames));
         while (!(gameOrNo)) {
-            System.out.println("Please enter a positive integer number.");
+            System.out.println(bundle.getString("wrongNumber"));
             numberOfGames = sc.nextLine();
             gameOrNo = check(Double.parseDouble(numberOfGames));
         }
@@ -32,14 +39,14 @@ public class StoneScissorsPaper {
         String bid = " ";
 
         while (bid.equalsIgnoreCase("Q") || games > counter) {
-            System.out.println("Make a bid: SS - for scissors, P - for paper, S - for stone, Q - to quit the game.");
+            System.out.println(bundle.getString("bid"));
             bid = sc.nextLine().toUpperCase();
             switch (bid) {
                 case "S":
                 case "P":
                 case "SS":
                     int wOL = winOrLose(bid);
-                    announce(wOL);
+                    announce(wOL, loc);
                     counter++;
                     if (wOL > 0) {
                         player.setWins(player.getWins() + 1);
@@ -56,17 +63,17 @@ public class StoneScissorsPaper {
                     System.exit(-1);
                     break;
                 default:
-                    System.out.println("Unknown bid. Please repeat.");
+                    System.out.println(bundle.getString("unknownBid"));
             }
 
         }
 
-        System.out.println("Where do you want to save your results? Paste the path, please.");
+        System.out.println(bundle.getString("pathForResults"));
 
         String path = sc.nextLine() + "results.txt";
 
         while(!(checkIn(path))){
-            System.out.println("Please, write down correct path.");
+            System.out.println(bundle.getString("incorrectPath"));
             path = sc.nextLine() + "results.txt";
         }
 
@@ -84,7 +91,7 @@ public class StoneScissorsPaper {
             output.write(wnr.getBytes(StandardCharsets.UTF_8));
             output.write(" \n ".getBytes(StandardCharsets.UTF_8));
         }
-        System.out.println("Now you can check your results in a file located on the path you specified. Thank you for a game and see you soon!");
+        System.out.println(bundle.getString("checkResults"));
     }
 
     public static int winOrLose(String bid) {
@@ -120,13 +127,16 @@ public class StoneScissorsPaper {
         }
     }
 
-    public static void announce(int value) {
+    public static void announce(int value, Locale loc ){
+
+        ResourceBundle bundle = ResourceBundle.getBundle("Localization",loc);
+
         if (value > 0) {
-            System.out.println("You win.");
+            System.out.println(bundle.getString("uWin"));
         } else if (value < 0) {
-            System.out.println("Computer win.");
+            System.out.println(bundle.getString("cWin"));
         } else {
-            System.out.println("Draw.");
+            System.out.println(bundle.getString("draw"));
         }
     }
 
