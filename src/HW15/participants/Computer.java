@@ -1,14 +1,14 @@
-package HW15;
+package HW15.participants;
 
-public class Player {
-    private String name;
+public class Computer {
+    private String name = "Computer";
     private int wins = 0;
     private int loses = 0;
     private int draws = 0;
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "Computer{" +
                 "name='" + name + '\'' +
                 ", wins=" + wins +
                 ", loses=" + loses +
@@ -38,9 +38,5 @@ public class Player {
 
     public void setLoses(int loses) {
         this.loses = loses;
-    }
-
-    public Player(String name) {
-        this.name = name;
     }
 }

@@ -1,28 +1,42 @@
-package HW15;
+package HW15.Game;
 
-import java.io.File;
+import HW15.participants.Computer;
+import HW15.participants.Player;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+import static HW15.utils.Announce.announce;
+import static HW15.utils.Checking.check;
+import static HW15.utils.Checking.checkIn;
+import static HW15.utils.LanguageChoice.choice;
+import static HW15.utils.WinOrLose.winOrLose;
+import static HW15.utils.Winner.winner;
+
 public class StoneScissorsPaper {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
 
-        Locale loc = new Locale("de");
+        Locale.setDefault(new Locale("uk","UA"));
 
-        Locale.setDefault(Locale.ENGLISH);
-
+        System.out.println("Hello! Which language would you prefer? 1 - Ukrainian, 2 - English, 3 - Germany.");
+        int answer = sc.nextInt();
+        Locale loc = choice(answer);
         ResourceBundle bundle = ResourceBundle.getBundle("Localization",loc);
 
         System.out.println(bundle.getString("name"));
-        Player player = new Player(sc.nextLine());
+        String playerName = "";
+        while(playerName.equals("")){
+            playerName = sc.nextLine();}
+        Player player = new Player(playerName);
         Computer computer = new Computer();
 
         System.out.println(bundle.getString("games"));
@@ -70,11 +84,11 @@ public class StoneScissorsPaper {
 
         System.out.println(bundle.getString("pathForResults"));
 
-        String path = sc.nextLine() + "results.txt";
+        String path = sc.nextLine() + "/results.txt";
 
         while(!(checkIn(path))){
             System.out.println(bundle.getString("incorrectPath"));
-            path = sc.nextLine() + "results.txt";
+            path = sc.nextLine() + "/results.txt";
         }
 
         String wnr = winner(counter, player.getWins(), computer.getWins());
@@ -94,76 +108,4 @@ public class StoneScissorsPaper {
         System.out.println(bundle.getString("checkResults"));
     }
 
-    public static int winOrLose(String bid) {
-
-        int random = (int) (Math.random() * 3);
-        String bid1 = switch (random) {
-            case 1 -> "SS";
-            case 2 -> "S";
-            case 3 -> "P";
-            default -> " ";
-        };
-        if (bid.equals("S") && bid1.equals("S")) {
-            return 0;
-        } else if (bid.equals("P") && bid1.equals("P")) {
-            return 0;
-        } else if (bid.equals("SS") && bid1.equals("SS")) {
-            return 0;
-        } else if (bid.equals("S") && bid1.equals("P")) {
-
-            return -1;
-        } else if (bid.equals("SS") && bid1.equals("P")) {
-            return 1;
-        } else if (bid.equals("P") && bid1.equals("S")) {
-            return 1;
-        } else if (bid.equals("P") && bid1.equals("SS")) {
-            return -1;
-        } else if (bid.equals("S") && bid1.equals("SS")) {
-            return 1;
-        } else if (bid.equals("SS") && bid1.equals("S")) {
-            return -1;
-        } else {
-            return -100;
-        }
-    }
-
-    public static void announce(int value, Locale loc ){
-
-        ResourceBundle bundle = ResourceBundle.getBundle("Localization",loc);
-
-        if (value > 0) {
-            System.out.println(bundle.getString("uWin"));
-        } else if (value < 0) {
-            System.out.println(bundle.getString("cWin"));
-        } else {
-            System.out.println(bundle.getString("draw"));
-        }
-    }
-
-
-    public static boolean check(double number) {
-        if ((number % 1) == 0 && number > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static String winner(int allGamesPlayed, int yourWins, int computerWins) {
-        if ((yourWins - computerWins) > 0) {
-            return "Congratulations! You beat computer!";
-        } else if ((computerWins - yourWins) > 0) {
-            return "You lose. Computer defeated you.";
-        } else if ((yourWins - computerWins) == 0) {
-           return "It's a draw.";
-        } else {
-            return " ";
-        }
-
-    }
-    public static boolean checkIn(String str){
-        if (Path.of(str).isAbsolute()){
-            return true;
-        } else {return false;}
-    }
 }

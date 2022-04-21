@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ResourceBundleManager">
-    <file url="file://$PROJECT_DIR$/src/HW15/Localization.properties" />
-    <file url="file://$PROJECT_DIR$/src/HW15/Localization_ua.properties" />
     <file url="file://$PROJECT_DIR$/src/HW15/resources/Localization_de.properties" />
     <file url="file://$PROJECT_DIR$/src/HW15/resources/Localization_eng.properties" />
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/HW15/Localization.properties" />
-      <file value="file://$PROJECT_DIR$/src/HW15/Localization_ua.properties" />
       <file value="file://$PROJECT_DIR$/src/HW15/resources/Localization_de.properties" />
       <file value="file://$PROJECT_DIR$/src/HW15/resources/Localization_eng.properties" />
+      <base-name>Localization</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/HW15/resources/Localization_de.properties" />
+      <file value="file://$PROJECT_DIR$/src/HW15/resources/Localization_eng.properties" />
+      <file value="file://$PROJECT_DIR$/src/HW15/resources/Localization_uk_UA.properties" />
       <base-name>Localization</base-name>
     </custom-resource-bundle>
   </component>
